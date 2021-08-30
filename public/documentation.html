@@ -1,19 +1,90 @@
 <!DOCTYPE html>
-<html lang="en" dir="1tr">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>Documentation</title>
   </head>
   <body>
     <h1>Documentation Page</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
+    <table>
+      <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>Response</th>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <!-- request method -->
+        <td>/movies</td>
+        <!-- url -->
+        <td>Returns list of all movies to user</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>GET</td>
+        <!-- request method -->
+        <td>/movies/[Title]</td>
+        <!-- url -->
+        <td>Returns data about a single movie to the user</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>GET</td>
+        <!-- request method -->
+        <td>/movies/[Title]/genre</td>
+        <!-- url -->
+        <td>Return data about genre by name/title</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>GET</td>
+        <!-- request method -->
+        <td>/movies/directors/[Name]</td>
+        <!-- url -->
+        <td>Return data about a director by name</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>POST</td>
+        <!-- request method -->
+        <td>/users/</td>
+        <!-- url -->
+        <td>Allow new users to register</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <!-- request method -->
+        <td>/users/[Username]</td>
+        <!-- url -->
+        <td>Allow users to update their user info</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>POST</td>
+        <!-- request method -->
+        <td>/movies</td>
+        <!-- url -->
+        <td>Allow users to add a movie to their favorites list</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <!-- request method -->
+        <td>/movies/[ID]</td>
+        <!-- url -->
+        <td>Allow users to remove a movie from their favorites list</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <!-- request method -->
+        <td>/users/</td>
+        <!-- url -->
+        <td>Allow users to deregister</td>
+        <!-- response -->
+      </tr>
+    </table>
   </body>
 </html>
