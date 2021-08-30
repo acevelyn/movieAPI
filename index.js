@@ -80,7 +80,7 @@ app.get("/movies/:title/:description/:genre", (req, resp) => {
   res.send("Successful GET Request to get data about a genre by title");
 });
 
-// Returns data about a director by name
+// Returns data about a director by name ***
 app.get("/movies/directors/:name", (req, res) => {
   res.send("Successful GET request to get data about a directory by name");
 });
@@ -96,7 +96,7 @@ app.put("/users/:username", (req, res) => {
 });
 
 // Allow users to add a movie to their favorites list
-app.post("/users/:username/favorites", (req, res) => {
+app.post("/movies", (req, res) => {
   res.send(
     "Successful POST request to allow users to add a movie to their favorites"
   );
