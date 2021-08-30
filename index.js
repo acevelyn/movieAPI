@@ -19,54 +19,99 @@ app.use(express.static("public"));
 // Array of Objects with Top Movies
 let topTenMovies = [
   {
-    number: 1,
+    id: 1,
     title: "Peter Pan"
   },
   {
-    number: 2,
+    id: 2,
     title: "Pitch Perfect"
   },
   {
-    number: 3,
+    id: 3,
     title: "The Edge of Seventeen"
   },
   {
-    number: 4,
+    id: 4,
     title: "The Avengers"
   },
   {
-    number: 5,
+    id: 5,
     title: "Beaches"
   },
   {
-    number: 6,
+    id: 6,
     title: "Little Women"
   },
   {
-    number: 7,
+    id: 7,
     title: "Riding in the car with boys"
   },
   {
-    number: 8,
+    id: 8,
     title: "If Only"
   },
   {
-    number: 9,
+    id: 9,
     title: "Clueless"
   },
   {
-    number: 10,
+    id: 10,
     title: "Life As We Know It"
   }
 ];
-// Converting topTenMovies to JSON when requested
-app.get("/movies", (req, res) => {
-  res.json(topTenMovies);
-});
-// Displaying a test message in root folder
+
+//Displaying a test message in root folder
 app.get("/", (req, res) => {
   res.send("Welcome to my Movies App!");
 });
+
+// Returns list of all movies
+app.get("/movies", (req, res) => {
+  res.json(topTenMovies);
+});
+
+// Returns data about a single movie to the user
+app.get("/movies/:title", (req, res) => {
+  res.send("Successful GET request to get data about a single movie");
+});
+
+// Returns data about a genre by name/title ****
+app.get("/movies/:title/:description/:genre", (req, resp) => {
+  res.send("Successful GET Request to get data about a genre by title");
+});
+
+// Returns data about a director by name
+app.get("/movies/directors/:name", (req, res) => {
+  res.send("Successful GET request to get data about a directory by name");
+});
+
+// Allow new users to register
+app.post("/users", (req, res) => {
+  res.send("Successful POST request to allow new users to register");
+});
+
+// Allow users to update their user info
+app.put("/users/:username", (req, res) => {
+  res.send("Successful PUT request to allow users to update their user info");
+});
+
+// Allow users to add a movie to their favorites list
+app.post("/users/:username/favorites", (req, res) => {
+  res.send(
+    "Successful POST request to allow users to add a movie to their favorites"
+  );
+});
+
+// Allow users to remove a movie from their favorites list
+app.delete("/movies/:id", (req, res) => {
+  res.send("Movie has been removed from list");
+});
+
+// Allow users to deregister
+app.delete("/users", (req, res) => {
+  res.send("User has been removed");
+});
+
 // An error handler function to log the errors that may come up
 app.use((err, req, res, next) => {
   console.error(err.stack);
