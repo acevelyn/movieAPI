@@ -6,25 +6,33 @@
     <title>Documentation</title>
 
     <style>
+      table tr,
       td {
-        text-align: center;
+        border: 1px black solid;
+        padding: 5px;
+      }
+      span {
+        font-style: italic;
       }
     </style>
   </head>
   <body>
     <h1>Documentation Page</h1>
+    <h2>My Flix APP</h2>
     <table>
       <tr>
-        <th>Request</th>
+        <th>METHOD</th>
         <th>URL</th>
-        <th>Response</th>
+        <th>REQUEST</th>
+        <th>RESPONSE</th>
       </tr>
       <tr>
         <td>GET</td>
-        <!-- request method -->
+        <!-- method -->
         <td>/movies</td>
         <!-- url -->
-        <td>Returns list of all movies to user</td>
+        <td>N/A</td>
+        <td>A JSON Object with data for all movies</td>
         <!-- response -->
       </tr>
       <tr>
@@ -32,31 +40,44 @@
         <!-- request method -->
         <td>/movies/[Title]</td>
         <!-- url -->
-        <td>Returns data about a single movie to the user</td>
+        <td>N/A</td>
+        <td>A JSON Object with data on a specific Movie</td>
         <!-- response -->
       </tr>
       <tr>
         <td>GET</td>
         <!-- request method -->
-        <td>/movies/[Title]/genre</td>
+        <td>/genre/[Name]</td>
         <!-- url -->
-        <td>Return data about genre by name/title</td>
+        <td>N/A</td>
+        <td>A JSON Object with data on a specific Genre</td>
         <!-- response -->
       </tr>
       <tr>
         <td>GET</td>
         <!-- request method -->
-        <td>/movies/directors/[Name]</td>
+        <td>/director/[Name]</td>
         <!-- url -->
-        <td>Return data about a director by name</td>
+        <td>N/A</td>
+        <td>A JSON Object with data on a certain Director</td>
         <!-- response -->
       </tr>
       <tr>
-        <td>POST</td>
+        <td>GET</td>
         <!-- request method -->
-        <td>/users/</td>
+        <td>/users</td>
         <!-- url -->
-        <td>Allow new users to register</td>
+        <td>N/A</td>
+        <td>A JSON Object with data for all Users</td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>GET</td>
+        <!-- request method -->
+        <td>/users/[Username]</td>
+        <!-- url -->
+        <td>N/A</td>
+        <td>A JSON Object with data on a specific User</td>
         <!-- response -->
       </tr>
       <tr>
@@ -64,31 +85,67 @@
         <!-- request method -->
         <td>/users/[Username]</td>
         <!-- url -->
-        <td>Allow users to update their user info</td>
+        <td>
+          JSON Object User Data<br />
+          <span>
+            {"Password": "test123"}
+          </span>
+        </td>
+        <td>
+          A JSON Object with updated data for that User<br />
+          <span>
+            {"Username": "User123", "Password": "test123", "Email":
+            "email@gmail.com", "Birthday": "10/10/10"}
+          </span>
+        </td>
         <!-- response -->
       </tr>
       <tr>
         <td>POST</td>
         <!-- request method -->
-        <td>/movies</td>
+        <td>/users</td>
         <!-- url -->
-        <td>Allow users to add a movie to their favorites list</td>
+        <td>
+          A JSON Object of all the required fields to create a user<br />
+          <span>
+            {"Username": "New123", "Password": "NewPass123", "Email":
+            "Newemail@gmail.com", "Birthday": "10/10/10"}
+          </span>
+        </td>
+        <td>
+          A JSON Object with data for New User<br />
+          <span>
+            {"Username": "New123", "Password": "NewPass123", "Email":
+            "Newemail@gmail.com", "Birthday": "10/10/10", "_id": "101010101010"}
+          </span>
+        </td>
+        <!-- response -->
+      </tr>
+      <tr>
+        <td>POST</td>
+        <!-- request method -->
+        <td>/users/[Username]/movies/[MovieID]</td>
+        <!-- url -->
+        <td>N/A</td>
+        <td>A Message stating the movie has been added to favorites</td>
         <!-- response -->
       </tr>
       <tr>
         <td>DELETE</td>
         <!-- request method -->
-        <td>/movies/[ID]</td>
+        <td>/users/[Username]/movies/[MovieID]</td>
         <!-- url -->
-        <td>Allow users to remove a movie from their favorites list</td>
+        <td>N/A</td>
+        <td>A Message stating the movie has been removed from favorites</td>
         <!-- response -->
       </tr>
       <tr>
         <td>DELETE</td>
         <!-- request method -->
-        <td>/users/</td>
+        <td>/users/[Username]</td>
         <!-- url -->
-        <td>Allow users to deregister</td>
+        <td>N/A</td>
+        <td>A Message stating the User has been removed.</td>
         <!-- response -->
       </tr>
     </table>
