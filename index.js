@@ -169,8 +169,25 @@ app.get(
 // Allow new users to register
 app.post(
   "/users",
-  passport.authenticate("jwt", { session: false }),
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required")
+      .not()
+      .isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail()
+  ],
+  passport.authenticate("jwt", { session: false }), // still need this?*
   (req, res) => {
+    let errors = validationResult(req);
+
+    if (!error.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     let hashedPassword = Users.hashedPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
       .then(user => {
@@ -202,6 +219,17 @@ app.post(
 // Allow users to update their user info
 app.put(
   "/users/:Username",
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required")
+      .not()
+      .isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail()
+  ],
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
