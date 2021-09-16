@@ -45,10 +45,15 @@ const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
 
-mongoose.connect("mongodb://localhost:27017/myFlixDB", {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+// mongoose.connect("mongodb://localhost:27017/myFlixDB", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 // Accessing files in the public folder
 app.use(morgan("common"));
@@ -328,3 +333,5 @@ app.listen(port, "0.0.0.0", () => {
 // app.listen(8080, () => {
 //   console.log("My app is listening on port 8080.");
 // });
+
+mongodb+srv://acevelyn14:Pookie0014@evelyndb.atpm0.mongodb.net/myFlixDB?retryWrites=true&w=majority
