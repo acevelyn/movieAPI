@@ -9,15 +9,14 @@
 // Implementing Express
 const express = require("express"),
   bodyParser = require("body-parser"),
-  morgan = require("morgan"),
-  path = require("path");
+  morgan = require("morgan");
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+let allowedOrigins = ["http://localhost:8080"];
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -34,7 +33,7 @@ app.use(
   })
 );
 
-let auth = require("./auth")(app);
+require("./auth")(app);
 const passport = require("passport");
 require("./passport");
 const { check, validationResult } = require("express-validator");
@@ -43,8 +42,6 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
-const Genres = Models.Genre;
-const Directors = Models.Director;
 
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
@@ -106,9 +103,9 @@ app.get(
   "/genre/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Genre.findOne({ Name: req.params.Name })
-      .then(name => {
-        res.json(name);
+    Movies.findOne({ "Genre.Name": req.params.Name })
+      .then(movie => {
+        res.json(movie.Genre);
       })
       .catch(err => {
         console.error(err);
@@ -132,10 +129,10 @@ app.get(
 
 // Returns data about a director by name ***
 app.get(
-  "/movies/directors/:name",
+  "/directors/:name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.send("Successful GET request to get data about a directory by name");
+    res.send("Succesful GET request to get data by director name");
   }
 );
 
