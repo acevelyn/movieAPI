@@ -99,30 +99,13 @@ app.get(
 );
 
 // Returns JSON info when looking for specific Genre
-// app.get(
-//   "/genres/:Name",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Movies.findOne({ "Genre.Name": req.params.Name })
-//       .then(movie => {
-//         res.json(movie.Genre);
-//       })
-//       .catch(err => {
-//         console.error(err);
-//         res.status(500).send("Error: " + err);
-//       });
-//   }
-// );
 app.get(
   "/genres/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.find()
-      .then(movies => {
-        Genre.findOne({ Name: req.params.Name });
-      })
-      .then(name => {
-        res.json(name);
+    Movies.findOne({ "Genre.Name": req.params.Name })
+      .then(movie => {
+        res.json(movie.Genre);
       })
       .catch(err => {
         console.error(err);
