@@ -100,7 +100,7 @@ app.get(
 
 // Returns JSON info when looking for specific Genre
 app.get(
-  "/genre/:Name",
+  "/genres/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ "Genre.Name": req.params.Name })
@@ -132,7 +132,14 @@ app.get(
   "/directors/:name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.send("Succesful GET request to get data by director name");
+    Movies.findOne({ "Director.Name": req.params.Name })
+      .then(movie => {
+        res.json(movie.Director);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
   }
 );
 
