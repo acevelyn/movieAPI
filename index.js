@@ -12,8 +12,8 @@ const express = require("express"),
   morgan = require("morgan");
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 // let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "https://evflixapp.herokuapp.com/"];
