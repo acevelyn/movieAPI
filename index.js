@@ -15,10 +15,12 @@ const app = express();
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-const cors = require("cors");
-// let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "https://evflixapp.herokuapp.com/"];
+// Including CORS to allow all domain/origins
+const cors = require('cors');
 app.use(cors());
-//   cors({
+
+// let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "https://evflixapp.herokuapp.com/"];
+// app.use(cors({
 //     origin: (origin, callback) => {
 //       if (!origin) return callback(null, true);
 //       if (allowedOrigins.indexOf(origin) === -1) {
@@ -66,7 +68,13 @@ app.get("/", (req, res) => {
 
 // ******** MOVIES ******
 
-// Returns all movies in JSON
+/**
+ * Get all movies
+ * @method GET
+ * @param {string} endpoint - endpoint to fetch movies "url/movies"
+ * @returns {object} - returns the movies object
+ * @requires authentication JWT
+ */
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -82,7 +90,14 @@ app.get(
   }
 );
 
-// Returns Movie by Title
+/**
+ * Get movie by title
+ * @method GET
+ * @param {string} endpoint - endpoint to fetch movies by title 
+ * @param {string} Title - is used to get the selected movie "url/movies/:Title"
+ * @returns {object} - returns the selected movie title object
+ * @requires authentication JWT
+ */
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -98,7 +113,14 @@ app.get(
   }
 );
 
-// Returns JSON info when looking for specific Genre
+/**
+ * Get genre by genre name
+ * @method GET
+ * @param {string} endpoint - endpoint to fetch genre by genre name
+ * @param {string} Name - is used to get the selected genre "url/genres/:Name"
+ * @returns {object} - returns the selected genre object
+ * @requires authentication JWT
+ */
 app.get(
   "/genres/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -114,7 +136,14 @@ app.get(
   }
 );
 
-// Returns data about a director by name ***
+/**
+ * Get director by director name
+ * @method GET
+ * @param {string} endpoint - endpoint to fetch director by director name
+ * @param {string} name - is used to get the selected director "url/directors/:name"
+ * @returns {object} - returns the selected director object
+ * @requires authentication JWT
+ */
 app.get(
   "/directors/:name",
   passport.authenticate("jwt", { session: false }),
@@ -130,8 +159,13 @@ app.get(
   }
 );
 
-// ****** USERS ****
-// Get all users
+/**
+ * Get all users
+ * @method GET
+ * @param {string} endpoint - endpoint to fetch all users 
+ * @returns {object} - returns users object
+ * @requires authentication JWT
+ */
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -147,7 +181,14 @@ app.get(
   }
 );
 
-// Get user by username
+/**
+ * Get user by username
+ * @method GET
+ * @param {string} endpoint - endpoint to fetch user by username 
+ * @param {string} Username - is used to get the logged in user "url/users/:Username"
+ * @returns {object} - returns the logged in user object
+ * @requires authentication JWT
+ */
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -163,7 +204,17 @@ app.get(
   }
 );
 
-// Allow new users to register
+/**
+ * Register new user
+ * @method POST
+ * @param {string} endpoint - endpoint to register as a new user "url/users"
+ * @param {string} Username - new user creates a username
+ * @param {string} Password - new user creates a password
+ * @param {string} Email - new user's email
+ * @param {string} Birthday - new user's birthday
+ * @returns {object} - returns the newly added user object
+ * @requires authentication JWT
+ */
 app.post(
   "/users",
   // Validation logic here for request
@@ -219,7 +270,17 @@ app.post(
   }
 );
 
-// Allow users to update their user info
+/**
+ * Update user information
+ * @method PUT
+ * @param {string} endpoint - endpoint to update user information "url/users/:Username"
+ * @param {string} Username - user changes username
+ * @param {string} Password - user changes password
+ * @param {string} Email - user changes email
+ * @param {string} Birthday - user changes birthday
+ * @returns {object} - returns the updated user object
+ * @requires authentication JWT
+ */
 app.put(
   "/users/:Username",
   [
@@ -259,7 +320,16 @@ app.put(
   }
 );
 
-// Allow users to add a movie to their favorites list
+
+/**
+ * Add a movie to user's favorites
+ * @method POST
+ * @param {string} endpoint - endpoint to add movie to user's favorites "url/users/:Username/movies/:MovieID"
+ * @param {string} Username - User's username is required
+ * @param {string} Title - Movie title is required
+ * @returns {object} - returns the updated favorite movies object
+ * @requires authentication JWT
+ */
 app.post(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -279,7 +349,15 @@ app.post(
   }
 );
 
-// Allow users to remove a movie from their favorites list
+/**
+ * Delete movie from user's favorites
+ * @method DELETE
+ * @param {string} endpoint - endpoint to delete movie from user's favorites "url/users/:Username/movies/:MovieID"
+ * @param {string} Username - User's username is required
+ * @param {string} Title - Movie title is required
+ * @returns {object} - returns the updated favorite movies object
+ * @requires authentication JWT
+ */
 app.delete(
   "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
@@ -299,7 +377,14 @@ app.delete(
   }
 );
 
-// Delete a user by username
+/**
+ * Delete user account
+ * @method DELETE
+ * @param {string} endpoint - endpoint to delete a user's account "url/users/:Username"
+ * @param {string} Username - User's username is required
+ * @returns {string} - returns success or error message
+ * @requires authentication JWT
+ */
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
